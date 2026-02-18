@@ -61,6 +61,14 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: .center,
           children: [
+            Card(
+              child: Image.asset(
+                'assets/images/img1.png',
+                width: 200,
+                height: 200,
+                fit: BoxFit.cover,
+              ),
+            ),
             Text(
               "Your fortune is:",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
