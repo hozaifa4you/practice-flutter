@@ -22,8 +22,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
-  final String _currentFortune = 'Your future is uncertain.';
-
   final String title;
 
   @override
@@ -31,8 +29,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  String? _currentFortune;
+  String? _currentFortune = "Your future is uncertain.";
 
   final _fortuneList = [
     'Your future is uncertain.',
@@ -43,39 +40,46 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
 
   void _randomFortune() {
-    var random = new Random();
+    var random = Random();
     final int fortune = random.nextInt(_fortuneList.length);
 
     _currentFortune = _fortuneList[fortune];
-    print(_currentFortune);
     setState(() {
       _currentFortune = _currentFortune;
     });
   }
 
+  void onPressed() {
+    print("Elevated Button Pressed");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: .center,
           children: [
-            Text("Your fortune is:"),
             Text(
-              "${_currentFortune}",
-              style: Theme.of(context).textTheme.headlineMedium,
+              "Your fortune is:",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  "$_currentFortune",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: _randomFortune,
+              child: Text("Get Random Fortune"),
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _randomFortune,
-        tooltip: 'Random Fortune',
-        child: const Icon(Icons.add),
       ),
     );
   }
